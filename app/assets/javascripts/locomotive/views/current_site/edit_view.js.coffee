@@ -32,9 +32,10 @@ class Locomotive.Views.CurrentSite.EditView extends Locomotive.Views.Shared.Form
 
     @enable_liquid_editing()
 
-  add_toggle_mode_for: (el_class) ->
-    el_id = '#site_' + el_class + '_input'
-    @$(el_id + ' .list input[type=checkbox]').bind 'change', (event) =>
+    @enable_checkboxes()
+
+  add_toggle_mode_for_locales: ->
+    @$('#site_locales_input .list input[type=checkbox]').bind 'change', (event) ->
       el = $(event.target)
       if el.is(':checked')
         el.closest('.entry').addClass('selected')
@@ -81,6 +82,9 @@ class Locomotive.Views.CurrentSite.EditView extends Locomotive.Views.Shared.Form
         theme:            'default'
 
       @editor.on 'change', (editor, change) => @model.set(robots_txt: editor.getValue())
+
+  enable_checkboxes: ->
+    @_enable_checkbox('prefix_default_locale')
 
   save: (event) ->
     # if @model.includes_domain(window.location.host)
