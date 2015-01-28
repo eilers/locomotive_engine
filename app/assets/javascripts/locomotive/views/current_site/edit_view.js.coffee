@@ -34,8 +34,10 @@ class Locomotive.Views.CurrentSite.EditView extends Locomotive.Views.Shared.Form
 
     @enable_checkboxes()
 
-  add_toggle_mode_for_locales: ->
-    @$('#site_locales_input .list input[type=checkbox]').bind 'change', (event) ->
+
+  add_toggle_mode_for: (el_class) ->
+    el_id = '#site_' + el_class + '_input'
+    @$(el_id + ' .list input[type=checkbox]').bind 'change', (event) =>
       el = $(event.target)
       if el.is(':checked')
         el.closest('.entry').addClass('selected')
